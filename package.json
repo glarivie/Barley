@@ -24,7 +24,7 @@
     "eslint-config-react-app": "0.3.0",
     "eslint-plugin-flowtype": "2.21.0",
     "eslint-plugin-import": "2.0.1",
-    "eslint-plugin-jsx-a11y": "4.0.0",
+    "eslint-plugin-jsx-a11y": "^4.0.0",
     "eslint-plugin-react": "6.4.1",
     "expo": "^15.1.0",
     "lodash": "^4.17.4",
