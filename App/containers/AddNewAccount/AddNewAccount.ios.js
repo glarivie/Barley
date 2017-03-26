@@ -1,36 +1,31 @@
 import React, { Component, PropTypes } from 'react'
 import { ScrollView, View, Text, Button, TextInput } from 'react-native'
+import { connect } from 'react-redux'
 import { isEmpty } from 'lodash'
 
-import { setAccount } from '../../actions/storage'
+import actions from '../../actions'
 
 import styles from './AddNewAccount.styles'
 
 class AddNewAccount extends Component {
   static propTypes = {
-    title: PropTypes.string,
-    navigator: PropTypes.object.isRequired,
+    dispatch: PropTypes.func.isRequired,
+    history: PropTypes.object.isRequired,
   }
 
-  initialState  = {
+  state = {
     accountName: '',
     bankName: '',
     amount: 0,
   }
 
-  state = this.initialState
-
-  componentWillMount () {
-    this.setState(this.initialState)
-  }
-
   handleChangeInput = (key, value) => this.setState({ [key]: value })
 
-  addNewAccount = async () => {
-    await setAccount(this.state)
-    await this.setState(this.initialState)
+  addNewAccount = () => {
+    const { dispatch, history } = this.props
 
-    this.props.navigator.pop() // Push to single account details
+    dispatch(actions.accounts.setAccount(this.state))
+    history.push({ pathname: '/' })
   }
 
   render () {
@@ -74,4 +69,4 @@ class AddNewAccount extends Component {
   }
 }
 
-export default AddNewAccount
+export default connect()(AddNewAccount)

@@ -19,6 +19,7 @@
     "preset": "jest-expo"
   },
   "dependencies": {
+    "@shoutem/ui": "^0.12.0",
     "babel-eslint": "7.0.0",
     "eslint": "3.8.1",
     "eslint-config-react-app": "0.3.0",
@@ -26,9 +27,15 @@
     "eslint-plugin-import": "2.0.1",
     "eslint-plugin-jsx-a11y": "^4.0.0",
     "eslint-plugin-react": "6.4.1",
-    "expo": "^15.1.0",
+    "expo": "^15.1.2",
+    "exponent": "^14.0.0",
     "lodash": "^4.17.4",
     "react": "~15.4.0",
-    "react-native": "0.42.3"
+    "react-native": "0.42.3",
+    "react-redux": "^5.0.3",
+    "react-router-native": "^4.0.0",
+    "redux": "^3.6.0",
+    "redux-persist": "^4.5.0",
+    "redux-thunk": "^2.2.0"
   }
 }

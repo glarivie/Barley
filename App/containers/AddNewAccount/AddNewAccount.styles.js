@@ -1,6 +1,6 @@
 import { StyleSheet } from 'react-native'
 
-import { lightgrey, white, darkgrey } from '../../shared/variables.styles'
+import { lightgrey, white, darkgrey } from '../../styles/shared/variables.styles'
 
 const styles = StyleSheet.create({
   AddNewAccount: {
