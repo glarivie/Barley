@@ -1,12 +1,12 @@
 import React, { Component } from 'react'
-import { Font } from 'expo'
+// import { Font } from 'expo'
 import { View } from 'react-native'
 import { Provider } from 'react-redux'
 import { NativeRouter, Route } from 'react-router-native'
 import { Components } from 'exponent'
 
 import store from './configureStore'
-import { fonts } from './constants'
+// import { fonts } from './constants'
 
 import Home from './containers/Home'
 import AddNewAccount from './containers/AddNewAccount'
@@ -19,7 +19,7 @@ class App extends Component {
   }
 
   loadFontsAssets = async () => {
-    await Promise.all(fonts.map(async font => await Font.loadAsync(font)))
+    // await Promise.all(fonts.map(async font => await Font.loadAsync(font)))
     this.setState({ ready: true })
   }
 
