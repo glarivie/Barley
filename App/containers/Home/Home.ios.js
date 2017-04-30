@@ -20,6 +20,7 @@ class Home extends Component {
 
     return (
       <View style={styles.Home}>
+        <Text>HOMEPAGE</Text>
         <List containerStyle={{ marginTop: 15 }}>
           {accounts.map(({ _id, bankName, accountName, amount = 0 }) => (
             <ListItem
