@@ -1,27 +1,30 @@
 import { StyleSheet } from 'react-native'
 
-import { lightgrey, white, darkgrey } from '../../styles/shared/variables.styles'
+import colors from '../../styles/shared/variables.styles'
 
 const styles = StyleSheet.create({
   AddNewAccount: {
     flex: 1,
-    backgroundColor: lightgrey,
+    backgroundColor: colors.white,
     paddingTop: 15,
   },
-  container: {
-    flex: 1,
-    backgroundColor: white,
-    width: '100%',
-    borderTopWidth: 0.5,
-    borderBottomWidth: 0.5,
-    borderColor: darkgrey,
-    padding: 10,
+  DisabledButton: {
+    backgroundColor: colors.beige,
+    marginTop: 15,
   },
-  input: {
-    height: 50,
-    borderColor: darkgrey,
-    borderWidth: 1,
-    padding: 10,
+  AddButton: {
+    backgroundColor: colors.pistache,
+    marginTop: 15,
+  },
+  infos: {
+    flex: 1,
+    alignItems: 'center',
+    justifyContent: 'center',
+    padding: 15,
+  },
+  instructions: {
+    color: colors.beige,
+    textAlign: 'center',
   },
 })
 

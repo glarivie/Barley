@@ -1,5 +1,6 @@
 import React, { Component, PropTypes } from 'react'
-import { ScrollView, View, Text, Button, TextInput } from 'react-native'
+import { ScrollView, View, Text } from 'react-native'
+import { FormLabel, FormInput, Button } from 'react-native-elements'
 import { connect } from 'react-redux'
 import { isEmpty } from 'lodash'
 
@@ -10,22 +11,29 @@ import styles from './AddNewAccount.styles'
 class AddNewAccount extends Component {
   static propTypes = {
     dispatch: PropTypes.func.isRequired,
-    history: PropTypes.object.isRequired,
+    navigator: PropTypes.object.isRequired,
+  }
+
+  static route = {
+    navigationBar: { title: 'Add new account' }
   }
 
   state = {
     accountName: '',
     bankName: '',
-    amount: 0,
+    amount: '',
   }
 
   handleChangeInput = (key, value) => this.setState({ [key]: value })
 
   addNewAccount = () => {
-    const { dispatch, history } = this.props
+    const { dispatch, navigator } = this.props
 
-    dispatch(actions.accounts.setAccount(this.state))
-    history.push({ pathname: '/' })
+    dispatch(actions.accounts.setAccount({
+      ...this.state,
+      amount: parseFloat(this.state.amount),
+    }))
+    navigator.pop()
   }
 
   render () {
@@ -33,36 +41,40 @@ class AddNewAccount extends Component {
     const isDisabled = isEmpty(accountName) || isEmpty(bankName)
 
     return (
-      <ScrollView
-        alignItems="center"
-        justifyContent="top"
-        style={styles.AddNewAccount}
-      >
-        <View style={styles.container}>
-          <Text style={styles.label}>Nom de la banque</Text>
-          <TextInput
-            style={styles.input}
-            onChangeText={value => this.handleChangeInput('bankName', value)}
-            value={bankName}
-          />
-          <Text style={styles.label}>Nom du compte</Text>
-          <TextInput
-            style={styles.input}
-            onChangeText={value => this.handleChangeInput('accountName', value)}
-            value={accountName}
-          />
-          <Text style={styles.label}>Montant de départ</Text>
-          <TextInput
-            style={styles.input}
-            onChangeText={value => this.handleChangeInput('amount', value)}
-            value={amount.toString()}
-            keyboardType="decimal-pad"
-          />
-          <Button
-            title="Ajouter un compte"
-            onPress={this.addNewAccount}
-            disabled={isDisabled}
-          />
+      <ScrollView style={styles.AddNewAccount}>
+        <FormLabel>Bank name</FormLabel>
+        <FormInput
+          value={bankName}
+          onChangeText={value => this.handleChangeInput('bankName', value)}
+        />
+
+        <FormLabel>Account type</FormLabel>
+        <FormInput
+          value={accountName}
+          onChangeText={value => this.handleChangeInput('accountName', value)}
+        />
+
+        <FormLabel>Current amount</FormLabel>
+        <FormInput
+          value={amount.toString()}
+          defaultValue="0"
+          keyboardType="decimal-pad"
+          onChangeText={value => this.handleChangeInput('amount', value)}
+        />
+
+        <Button
+          icon={{ name: 'ios-add-circle-outline', type: 'ionicon' }}
+          title='Add an account'
+          onPress={this.addNewAccount}
+          buttonStyle={styles.AddButton}
+          disabledStyle={styles.DisabledButton}
+          disabled={isDisabled}
+        />
+
+        <View style={styles.infos}>
+          <Text style={styles.instructions}>
+            Add an account by filling all the fields before using app functionnalities
+          </Text>
         </View>
       </ScrollView>
     )
