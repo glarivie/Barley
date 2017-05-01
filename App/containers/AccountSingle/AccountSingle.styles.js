@@ -29,9 +29,6 @@ const styles = StyleSheet.create({
     backgroundColor: colors.error,
     marginBottom: 15,
   },
-  Icon: {
-    color: colors.white,
-  },
 })
 
 export default styles

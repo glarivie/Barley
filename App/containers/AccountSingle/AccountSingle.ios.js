@@ -1,12 +1,14 @@
 import React, { Component } from 'react'
 import PropTypes from 'prop-types'
 import { View, Text, ScrollView } from 'react-native'
-import { List, ListItem, Button } from 'react-native-elements'
+import { List, ListItem, Button, Icon } from 'react-native-elements'
 import { connect } from 'react-redux'
 import { get, isEmpty } from 'lodash'
 
 import actions from '../../actions'
 import router from '../../router'
+
+import SettingsNavBar from '../../components/SettingsNavBar'
 
 import styles from './AccountSingle.styles'
 
@@ -14,27 +16,37 @@ class AccountSingle extends Component {
   static propTypes = {
     dispatch: PropTypes.func.isRequired,
     route: PropTypes.object.isRequired,
-    _id: PropTypes.string.isRequired,
-    bankName: PropTypes.string.isRequired,
-    accountName: PropTypes.string,
-    amount: PropTypes.number,
-    data: PropTypes.array,
+    account: PropTypes.object.isRequired,
     navigator: PropTypes.object.isRequired,
   }
 
   static route = {
-    navigationBar: { title: ({ bankName }) => bankName },
+    navigationBar: {
+      title: ({ bankName }) => bankName,
+      renderRight: ({ params }) => {
+        // console.log('renderRight', Object.keys(route.params))
+        return <SettingsNavBar _id={params._id} />
+        // return (
+        //   <Icon
+        //     name="ios-trash-outline"
+        //     type="ionicon"
+        //     iconStyle={styles.Icon}
+        //     onPress={() => navigator.push(router.getRoute('EditAccount', { ...account }))}
+        //   />
+        // )
+      },
+    },
   }
 
   deleteAccount = () => {
-    const { _id, dispatch, navigator } = this.props
+    const { account, dispatch, navigator } = this.props
 
-    dispatch(actions.accounts.deleteAccount(_id))
+    dispatch(actions.accounts.deleteAccount(account._id))
     navigator.pop()
   }
 
   render () {
-    const { _id, navigator, amount, data } = this.props
+    const { navigator, account: { _id, amount, data } } = this.props
 
     return (
       <View style={styles.AccountSingle}>
@@ -82,7 +94,7 @@ class AccountSingle extends Component {
 }
 
 const mapStateToProps = ({ accounts }, { route: { params } }) => ({
-  ...get(accounts, 'accounts', []).find(({ _id }) => _id === params._id),
+  account: get(accounts, 'accounts', []).find(({ _id }) => _id === params._id),
 })
 
 export default connect(mapStateToProps)(AccountSingle)
