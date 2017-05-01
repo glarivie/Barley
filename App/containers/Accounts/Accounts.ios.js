@@ -53,7 +53,7 @@ Accounts.propTypes = {
 }
 
 Accounts.route = {
-  navigationBar: { title: 'Accounts' }
+  navigationBar: { title: 'Accounts' },
 }
 
 const mapStateToProps = ({ accounts }) => ({
