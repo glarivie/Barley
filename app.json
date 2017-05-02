@@ -3,7 +3,7 @@
     "sdkVersion": "15.0.0",
     "name": "Barley",
     "description": "Barley is a simple bank account management mobile application made with React Native",
-    "privacy": "privacy",
+    "privacy": "unlisted",
     "version": "1.0.0",
     "orientation": "portrait"
   }
