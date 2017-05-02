@@ -22,7 +22,7 @@ const Accounts = ({ accounts, navigator }) => (
             subtitle={accountName}
             avatar={INGLogo}
             rightTitle={`${amount} €`}
-            onPress={() => navigator.push(router.getRoute('AccountSingle', { _id, bankName }))}
+            onPress={() => navigator.push(router.getRoute('AccountSingle', { _id, accountName }))}
             roundAvatar
           />
         ))}

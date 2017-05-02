@@ -1,11 +1,10 @@
 import React, { Component } from 'react'
 import PropTypes from 'prop-types'
 import { View, Text, ScrollView } from 'react-native'
-import { List, ListItem, Button, Icon } from 'react-native-elements'
+import { List, ListItem, Button } from 'react-native-elements'
 import { connect } from 'react-redux'
 import { get, isEmpty } from 'lodash'
 
-import actions from '../../actions'
 import router from '../../router'
 
 import SettingsNavBar from '../../components/SettingsNavBar'
@@ -22,27 +21,15 @@ class AccountSingle extends Component {
 
   static route = {
     navigationBar: {
-      title: ({ bankName }) => bankName,
-      renderRight: ({ params }) => {
-        // console.log('renderRight', Object.keys(route.params))
-        return <SettingsNavBar _id={params._id} />
-        // return (
-        //   <Icon
-        //     name="ios-trash-outline"
-        //     type="ionicon"
-        //     iconStyle={styles.Icon}
-        //     onPress={() => navigator.push(router.getRoute('EditAccount', { ...account }))}
-        //   />
-        // )
-      },
+      title: ({ accountName }) => accountName,
+      renderRight: ({ params }) => (
+        <SettingsNavBar
+          icon="ios-settings"
+          params={params}
+          routeName="EditAccount"
+        />
+      ),
     },
-  }
-
-  deleteAccount = () => {
-    const { account, dispatch, navigator } = this.props
-
-    dispatch(actions.accounts.deleteAccount(account._id))
-    navigator.pop()
   }
 
   render () {
@@ -79,14 +66,6 @@ class AccountSingle extends Component {
               ))}
             </List>
           )}
-
-          <Button
-            icon={{ name: 'ios-trash-outline', type: 'ionicon' }}
-            title='Delete account'
-            onPress={() => alert('Press this button longer to confirm the delete')}
-            onLongPress={this.deleteAccount}
-            buttonStyle={styles.DeleteButton}
-          />
         </ScrollView>
       </View>
     )

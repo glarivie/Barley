@@ -1,11 +1,13 @@
 import React, { Component, PropTypes } from 'react'
-import { ScrollView, View, Text } from 'react-native'
+import { ScrollView, View, Text, Keyboard } from 'react-native'
 import { FormLabel, FormInput, Button, ButtonGroup } from 'react-native-elements'
+import SimplePicker from 'react-native-simple-picker'
 import { connect } from 'react-redux'
 import { isEmpty } from 'lodash'
 import { format } from 'date-fns'
 
 import actions from '../../actions'
+import { categories } from '../../constants'
 import colors from '../../styles/shared/variables.styles'
 
 import styles from './AddNewOperation.styles'
@@ -35,6 +37,11 @@ class AddNewOperation extends Component {
   }
 
   handleChangeInput = (key, value) => this.setState({ [key]: value })
+
+  togglePicker = type => {
+    Keyboard.dismiss()
+    this._picker.show()
+  }
 
   AddNewOperation = async () => {
     const { dispatch, navigator, route: { params } } = this.props
@@ -74,7 +81,7 @@ class AddNewOperation extends Component {
         <FormLabel>Category</FormLabel>
         <FormInput
           value={category}
-          onChangeText={value => this.handleChangeInput('category', value)}
+          onFocus={this.togglePicker}
         />
 
         <FormLabel>Amount</FormLabel>
@@ -99,6 +106,13 @@ class AddNewOperation extends Component {
             All fields but category are required
           </Text>
         </View>
+
+        <SimplePicker
+          ref={p => this._picker = p}
+          options={categories}
+          onSubmit={value => this.handleChangeInput('category', value)}
+          confirmText="Select"
+        />
       </ScrollView>
     )
   }

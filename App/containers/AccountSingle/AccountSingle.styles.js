@@ -25,10 +25,6 @@ const styles = StyleSheet.create({
     borderTopWidth: 0.5,
     borderBottomWidth: 0,
   },
-  DeleteButton: {
-    backgroundColor: colors.error,
-    marginBottom: 15,
-  },
 })
 
 export default styles
