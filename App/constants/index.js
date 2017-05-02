@@ -1,5 +1,7 @@
-import fonts from './fonts'
+import categories from './categories'
+import banks from './banks'
 
 export {
-  fonts,
+  categories,
+  banks,
 }
