@@ -15,6 +15,17 @@ const accountsReducer = (state = {}, { type, data }) => {
           },
         ],
       })
+    case 'EDIT_ACCOUNT': {
+      const accounts = get(state, 'accounts', [])
+      const _id = accounts.findIndex(({ _id }) => _id === get(data, '_id', 0))
+
+      accounts[_id] = data
+
+      return ({
+        ...state,
+        ...accounts,
+      })
+    }
     case 'ADD_NEW_OPERATION': {
       const accounts = get(state, 'accounts', [])
       const _id = accounts.findIndex(({ _id }) => _id === get(data, '_id', 0))

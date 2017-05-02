@@ -1,10 +1,12 @@
 import React, { Component, PropTypes } from 'react'
-import { ScrollView, View, Text } from 'react-native'
+import { ScrollView, ActionSheetIOS, Keyboard } from 'react-native'
+import SimplePicker from 'react-native-simple-picker'
 import { FormLabel, FormInput, Button } from 'react-native-elements'
 import { connect } from 'react-redux'
 import { get, isEmpty } from 'lodash'
 
 import actions from '../../actions'
+import { banks } from '../../constants'
 
 import styles from './EditAccount.styles'
 
@@ -23,14 +25,41 @@ class EditAccount extends Component {
 
   handleChangeInput = (key, value) => this.setState({ [key]: value })
 
-  addNewAccount = () => {
-    const { dispatch, navigator } = this.props
+  togglePicker = type => {
+    Keyboard.dismiss()
+    this._picker.show()
+  }
 
-    dispatch(actions.accounts.setAccount({
+  editAccount = () => {
+    const { dispatch, navigator, account } = this.props
+    const { amount } = this.state
+
+    dispatch(actions.accounts.editAccount({
       ...this.state,
-      amount: parseFloat(this.state.amount),
+      amount: parseFloat(`${amount}`.replace(',', '.')),
+      _id: account._id,
     }))
     navigator.pop()
+  }
+
+  deleteAccount = () => {
+    const { account, dispatch, navigator } = this.props
+
+    dispatch(actions.accounts.deleteAccount(get(account, '_id')))
+    navigator.popToTop()
+  }
+
+  showActionSheet = () => {
+    const { account: { bankName, accountName} } = this.props
+
+    ActionSheetIOS.showActionSheetWithOptions({
+      options: ['Delete', 'Cancel'],
+      title: 'Confirm delete account ?',
+      message: `${bankName} - ${accountName}`,
+      cancelButtonIndex: 1,
+      destructiveButtonIndex: 0,
+    },
+    buttonIndex => buttonIndex === 0 ? this.deleteAccount() : false)
   }
 
   render () {
@@ -42,7 +71,7 @@ class EditAccount extends Component {
         <FormLabel>Bank name</FormLabel>
         <FormInput
           value={bankName}
-          onChangeText={value => this.handleChangeInput('bankName', value)}
+          onFocus={this.togglePicker}
         />
 
         <FormLabel>Account type</FormLabel>
@@ -62,17 +91,25 @@ class EditAccount extends Component {
         <Button
           icon={{ name: 'ios-create-outline', type: 'ionicon' }}
           title='Edit account'
-          onPress={this.addNewAccount}
-          buttonStyle={styles.AddButton}
+          onPress={this.editAccount}
+          buttonStyle={styles.EditButton}
           disabledStyle={styles.DisabledButton}
           disabled={isDisabled}
         />
 
-        <View style={styles.infos}>
-          <Text style={styles.instructions}>
-            Add an account by filling all the fields before using app functionnalities
-          </Text>
-        </View>
+        <Button
+          icon={{ name: 'ios-trash-outline', type: 'ionicon' }}
+          title='Delete account'
+          onPress={this.showActionSheet}
+          buttonStyle={styles.DeleteButton}
+        />
+
+        <SimplePicker
+          ref={p => this._picker = p}
+          options={banks}
+          onSubmit={value => this.handleChangeInput('bankName', value)}
+          confirmText="Select"
+        />
       </ScrollView>
     )
   }

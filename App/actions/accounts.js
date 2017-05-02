@@ -4,6 +4,12 @@ const setAccount = account => async dispatch =>
     data: account,
   })
 
+const editAccount = account => async dispatch =>
+  dispatch({
+    type: 'EDIT_ACCOUNT',
+    data: account,
+  })
+
 const deleteAccount = accountID => async dispatch =>
   dispatch({
     type: 'DELETE_ACCOUNT',
@@ -18,6 +24,7 @@ const AddNewOperation = (_id, operation) => async dispatch =>
 
 export default {
   setAccount,
+  editAccount,
   deleteAccount,
   AddNewOperation,
 }

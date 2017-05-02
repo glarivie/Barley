@@ -12,8 +12,12 @@ const styles = StyleSheet.create({
     backgroundColor: colors.beige,
     marginTop: 15,
   },
-  AddButton: {
+  EditButton: {
     backgroundColor: colors.pistache,
+    marginTop: 15,
+  },
+  DeleteButton: {
+    backgroundColor: colors.error,
     marginTop: 15,
   },
   infos: {
