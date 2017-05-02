@@ -7,7 +7,10 @@ yarn
 yarn start
 ```
 
-##### TODO
+##### TODOS
 
- - [] Confirm Popup on account delete
- - [] BankList
+ - [ ] Different avatar for banks
+ - [ ] ScrollView on Account Page
+ - [ ] Remove 2 month older operations
+ - [ ] Update accountName on NavBar after edit
+ - [ ] Add tabs with stats
