@@ -21,7 +21,7 @@ const Accounts = ({ accounts, navigator }) => (
             title={bankName}
             subtitle={accountName}
             avatar={INGLogo}
-            rightTitle={`${amount} €`}
+            rightTitle={`${amount.toFixed(2)} €`}
             onPress={() => navigator.push(router.getRoute('AccountSingle', { _id, accountName }))}
             roundAvatar
           />

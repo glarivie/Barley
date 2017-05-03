@@ -39,7 +39,7 @@ class AccountSingle extends Component {
       <View style={styles.AccountSingle}>
         <View style={styles.total}>
           <Text style={styles.totalText}>
-            Hey ! You have {amount} € on this account !
+            Hey ! You have {amount.toFixed(2)} € on this account !
           </Text>
         </View>
 
@@ -59,8 +59,7 @@ class AccountSingle extends Component {
                   containerStyle={styles.ListItem}
                   title={label}
                   subtitle={date || category}
-                  rightTitle={type === 'credit' ? `+${amount} €` : `${amount} €`}
-                  // onPress={() => navigator.push(router.getRoute('AccountSingle', { _id, bankName }))}
+                  rightTitle={type === 'credit' ? `+${amount.toFixed(2)} €` : `${amount.toFixed(2)} €`}
                   hideChevron
                 />
               ))}

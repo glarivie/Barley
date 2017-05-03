@@ -45,7 +45,8 @@ class AddNewOperation extends Component {
 
   AddNewOperation = async () => {
     const { dispatch, navigator, route: { params } } = this.props
-    const { amount, type } = this.state
+    const { amount: nb, type } = this.state
+    const amount = nb.replace(',', '.')
 
     dispatch(actions.accounts.AddNewOperation(params._id, {
       ...this.state,
