@@ -8,6 +8,9 @@ const styles = StyleSheet.create({
     paddingTop: 15,
     backgroundColor: colors.white,
   },
+  ListItem: {
+    backgroundColor: colors.white,
+  },
   total: {
     alignItems: 'center',
     marginBottom: 10,
