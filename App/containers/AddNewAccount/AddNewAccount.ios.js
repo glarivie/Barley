@@ -1,12 +1,11 @@
 import React, { Component, PropTypes } from 'react'
-import { ScrollView, View, Text, Keyboard } from 'react-native'
+import { ScrollView, View, Text } from 'react-native'
 import { FormLabel, FormInput, Button } from 'react-native-elements'
-import SimplePicker from 'react-native-simple-picker'
 import { connect } from 'react-redux'
 import { isEmpty } from 'lodash'
 
 import actions from '../../actions'
-import { banks } from '../../constants'
+import colors from '../../styles/shared/variables.styles'
 
 import styles from './AddNewAccount.styles'
 
@@ -42,28 +41,32 @@ class AddNewAccount extends Component {
     navigator.pop()
   }
 
-  togglePicker = type => {
-    Keyboard.dismiss()
-    this._picker.show()
-  }
-
   render () {
     const { account: { accountName, bankName, amount } } = this.state
     const isDisabled = isEmpty(accountName) || isEmpty(bankName)
+    const defaultOptions = {
+      placeholderTextColor: colors.beige,
+      keyboardAppearance: 'dark',
+      spellCheck: false,
+    }
 
     return (
       <ScrollView style={styles.AddNewAccount}>
         <FormLabel>Bank name</FormLabel>
         <FormInput
           value={bankName}
-          onFocus={this.togglePicker}
+          onChangeText={value => this.handleChangeInput('bankName', value)}
+          placeholder="ING Direct"
+          {...defaultOptions}
+          autoFocus
         />
 
         <FormLabel>Account type</FormLabel>
         <FormInput
           value={accountName}
           onChangeText={value => this.handleChangeInput('accountName', value)}
-          onFocus={this.handleFocus}
+          placeholder="Compte courant"
+          {...defaultOptions}
         />
 
         <FormLabel>Current amount</FormLabel>
@@ -71,8 +74,9 @@ class AddNewAccount extends Component {
           value={amount.toString()}
           defaultValue="0"
           keyboardType="decimal-pad"
-          onFocus={this.handleFocus}
           onChangeText={value => this.handleChangeInput('amount', value)}
+          placeholder="0,00"
+          {...defaultOptions}
         />
 
         <Button
@@ -89,13 +93,6 @@ class AddNewAccount extends Component {
             Add an account by filling all the fields before using app functionnalities
           </Text>
         </View>
-
-        <SimplePicker
-          ref={p => this._picker = p}
-          options={banks}
-          onSubmit={value => this.handleChangeInput('bankName', value)}
-          confirmText="Select"
-        />
       </ScrollView>
     )
   }
