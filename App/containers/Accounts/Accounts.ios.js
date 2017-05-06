@@ -32,7 +32,7 @@ const Accounts = ({ accounts, navigator }) => (
     <Button
       icon={{ name: 'ios-add-circle-outline', type: 'ionicon' }}
       title='Add an account'
-      onPress={() => navigator.push('AddNewAccount')}
+      onPress={() => navigator.push('AddOrCreateAccount')}
       buttonStyle={styles.AddButton}
     />
 

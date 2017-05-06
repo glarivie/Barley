@@ -26,7 +26,7 @@ class AccountSingle extends Component {
         <SettingsNavBar
           icon="ios-settings"
           params={params}
-          routeName="EditAccount"
+          routeName="AddOrCreateAccount"
         />
       ),
     },

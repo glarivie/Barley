@@ -3,7 +3,7 @@ import { StyleSheet } from 'react-native'
 import colors from '../../styles/shared/variables.styles'
 
 const styles = StyleSheet.create({
-  EditAccount: {
+  AddOrCreateAccount: {
     flex: 1,
     backgroundColor: colors.white,
     paddingTop: 15,
@@ -12,12 +12,12 @@ const styles = StyleSheet.create({
     backgroundColor: colors.beige,
     marginTop: 15,
   },
-  EditButton: {
-    backgroundColor: colors.pistache,
-    marginTop: 15,
-  },
   DeleteButton: {
     backgroundColor: colors.error,
+    marginTop: 15,
+  },
+  AddButton: {
+    backgroundColor: colors.pistache,
     marginTop: 15,
   },
   infos: {
