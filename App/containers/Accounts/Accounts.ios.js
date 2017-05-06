@@ -1,6 +1,6 @@
 import React from 'react'
 import PropTypes from 'prop-types'
-import { View, Text } from 'react-native'
+import { ScrollView, View, Text } from 'react-native'
 import { List, ListItem, Button } from 'react-native-elements'
 import { connect } from 'react-redux'
 import { get, isEmpty } from 'lodash'
@@ -11,7 +11,7 @@ import router from '../../router'
 import styles from './Accounts.styles'
 
 const Accounts = ({ accounts, navigator }) => (
-  <View style={styles.Home}>
+  <ScrollView style={styles.Home}>
     {!isEmpty(accounts) && (
       <List containerStyle={styles.AccountsList}>
         {accounts.map(({ _id, bankName, accountName, amount = 0 }) => (
@@ -43,7 +43,7 @@ const Accounts = ({ accounts, navigator }) => (
         </Text>
       </View>
     )}
-  </View>
+  </ScrollView>
 )
 
 Accounts.propTypes = {
