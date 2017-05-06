@@ -5,7 +5,7 @@ import { List, ListItem, Button } from 'react-native-elements'
 import { connect } from 'react-redux'
 import { get, isEmpty } from 'lodash'
 
-import INGLogo from '../../assets/ing-logo.png'
+import accountLogo from '../../assets/icon-checking.png'
 import router from '../../router'
 
 import styles from './Accounts.styles'
@@ -20,7 +20,7 @@ const Accounts = ({ accounts, navigator }) => (
             containerStyle={styles.ListItem}
             title={bankName}
             subtitle={accountName}
-            avatar={INGLogo}
+            avatar={accountLogo}
             rightTitle={`${amount.toFixed(2)} €`}
             onPress={() => navigator.push(router.getRoute('AccountSingle', { _id, accountName }))}
             roundAvatar
