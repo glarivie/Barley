@@ -26,7 +26,7 @@ class AccountSingle extends Component {
         <SettingsNavBar
           icon="ios-settings"
           params={params}
-          routeName="AddOrCreateAccount"
+          routeName="AddOrEditAccount"
         />
       ),
     },
@@ -46,7 +46,7 @@ class AccountSingle extends Component {
         <Button
           icon={{ name: 'ios-add-circle-outline', type: 'ionicon' }}
           title='Add new operation'
-          onPress={() => navigator.push(router.getRoute('AddNewOperation', { _id }))}
+          onPress={() => navigator.push(router.getRoute('AddOrEditOperation', { _id }))}
           buttonStyle={styles.AddButton}
         />
 

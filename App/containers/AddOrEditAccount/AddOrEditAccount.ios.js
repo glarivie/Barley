@@ -7,9 +7,9 @@ import { get, isEmpty, isNil, has } from 'lodash'
 import actions from '../../actions'
 import colors from '../../styles/shared/variables.styles'
 
-import styles from './AddOrCreateAccount.styles'
+import styles from './AddOrEditAccount.styles'
 
-class AddOrCreateAccount extends Component {
+class AddOrEditAccount extends Component {
   static propTypes = {
     dispatch: PropTypes.func.isRequired,
     navigator: PropTypes.object.isRequired,
@@ -70,7 +70,7 @@ class AddOrCreateAccount extends Component {
     }
 
     return (
-      <ScrollView style={styles.AddOrCreateAccount}>
+      <ScrollView style={styles.AddOrEditAccount}>
         <FormLabel>Bank name</FormLabel>
         <FormInput
           value={bankName}
@@ -145,4 +145,4 @@ const mapStateToProps = ({ accounts }, { route: { params } }) => {
   })
 }
 
-export default connect(mapStateToProps)(AddOrCreateAccount)
+export default connect(mapStateToProps)(AddOrEditAccount)

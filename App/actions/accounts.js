@@ -16,7 +16,7 @@ const deleteAccount = accountID => async dispatch =>
     data: accountID,
   })
 
-const AddNewOperation = (_id, operation) => async dispatch =>
+const addNewOperation = (_id, operation) => async dispatch =>
   dispatch({
     type: 'ADD_NEW_OPERATION',
     data: { _id, operation },
@@ -26,5 +26,5 @@ export default {
   setAccount,
   editAccount,
   deleteAccount,
-  AddNewOperation,
+  addNewOperation,
 }

@@ -1,14 +1,14 @@
 import { createRouter } from '@expo/ex-navigation'
 
 import Accounts from './containers/Accounts'
-import AddOrCreateAccount from './containers/AddOrCreateAccount'
-import AddNewOperation from './containers/AddNewOperation'
+import AddOrEditAccount from './containers/AddOrEditAccount'
+import AddOrEditOperation from './containers/AddOrEditOperation'
 import AccountSingle from './containers/AccountSingle'
 
 const router = createRouter(() => ({
   Accounts: () => Accounts,
-  AddOrCreateAccount: () => AddOrCreateAccount,
-  AddNewOperation: () => AddNewOperation,
+  AddOrEditAccount: () => AddOrEditAccount,
+  AddOrEditOperation: () => AddOrEditOperation,
   AccountSingle: () => AccountSingle,
 }))
 

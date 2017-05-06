@@ -1,18 +1,20 @@
 import React, { Component, PropTypes } from 'react'
 import { ScrollView, View, Text, Keyboard } from 'react-native'
 import { FormLabel, FormInput, Button, ButtonGroup } from 'react-native-elements'
-import SimplePicker from 'react-native-simple-picker'
+// import SimplePicker from 'react-native-simple-picker'
 import { connect } from 'react-redux'
 import { isEmpty } from 'lodash'
 import { format } from 'date-fns'
+
+import SimplePicker from '../../components/SimplePicker'
 
 import actions from '../../actions'
 import { categories } from '../../constants'
 import colors from '../../styles/shared/variables.styles'
 
-import styles from './AddNewOperation.styles'
+import styles from './AddOrEditOperation.styles'
 
-class AddNewOperation extends Component {
+class AddOrEditOperation extends Component {
   static propTypes = {
     dispatch: PropTypes.func.isRequired,
     navigator: PropTypes.object.isRequired,
@@ -40,15 +42,15 @@ class AddNewOperation extends Component {
 
   togglePicker = type => {
     Keyboard.dismiss()
-    this._picker.show()
+    this._picker.togglePicker()
   }
 
-  AddNewOperation = async () => {
+  addNewOperation = async () => {
     const { dispatch, navigator, route: { params } } = this.props
     const { amount: nb, type } = this.state
     const amount = nb.replace(',', '.')
 
-    dispatch(actions.accounts.AddNewOperation(params._id, {
+    dispatch(actions.accounts.addNewOperation(params._id, {
       ...this.state,
       amount: parseFloat(type === 'debit' ? `-${amount}` : amount),
       date: format(new Date(), 'DD/MM/YYYY'),
@@ -60,9 +62,13 @@ class AddNewOperation extends Component {
     const buttons = ['debit', 'credit']
     const { type, label, category, amount } = this.state
     const isDisabled = isEmpty(label) || isEmpty(amount)
+    const defaultOptions = {
+      placeholderTextColor: colors.beige,
+      spellCheck: false,
+    }
 
     return (
-      <ScrollView style={styles.AddNewOperation}>
+      <ScrollView style={styles.AddOrEditOperation}>
         <ButtonGroup
           buttons={buttons}
           onPress={this.handleChangeType}
@@ -76,27 +82,34 @@ class AddNewOperation extends Component {
         <FormLabel>Label</FormLabel>
         <FormInput
           value={label}
+          placeholder="Bouygues mobile"
           onChangeText={value => this.handleChangeInput('label', value)}
+          {...defaultOptions}
+          autoFocus
         />
 
         <FormLabel>Category</FormLabel>
         <FormInput
           value={category}
+          placeholder="Abonnements"
           onFocus={this.togglePicker}
+          {...defaultOptions}
         />
 
         <FormLabel>Amount</FormLabel>
         <FormInput
           value={amount.toString()}
+          placeholder="0,00"
           defaultValue="0"
           keyboardType="decimal-pad"
           onChangeText={value => this.handleChangeInput('amount', value)}
+          {...defaultOptions}
         />
 
         <Button
           icon={{ name: 'ios-add-circle-outline', type: 'ionicon' }}
           title='Add this operation'
-          onPress={this.AddNewOperation}
+          onPress={this.addNewOperation}
           buttonStyle={styles.AddButton}
           disabledStyle={styles.DisabledButton}
           disabled={isDisabled}
@@ -119,4 +132,4 @@ class AddNewOperation extends Component {
   }
 }
 
-export default connect()(AddNewOperation)
+export default connect()(AddOrEditOperation)
