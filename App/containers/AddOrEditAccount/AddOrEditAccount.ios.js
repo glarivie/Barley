@@ -1,4 +1,5 @@
-import React, { Component, PropTypes } from 'react'
+import React, { Component } from 'react'
+import PropTypes from 'prop-types'
 import { ScrollView, View, Text, ActionSheetIOS } from 'react-native'
 import { FormLabel, FormInput, Button } from 'react-native-elements'
 import { connect } from 'react-redux'

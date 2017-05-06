@@ -4735,6 +4735,10 @@ react-native-elements@^0.10.2:
   version "0.12.2"
   resolved "https://github.com/exponent/react-native-maps/archive/v0.12.2-exp.1.tar.gz#1984bfe5a8a341dd3b44ad565cfcd1b25a5c2b03"
 
+react-native-pie-chart@^1.0.9:
+  version "1.0.9"
+  resolved "https://registry.yarnpkg.com/react-native-pie-chart/-/react-native-pie-chart-1.0.9.tgz#80424c9ffb4589fc18a24db16eaa7ae02b86badf"
+
 react-native-safe-module@^1.1.0:
   version "1.1.1"
   resolved "https://registry.yarnpkg.com/react-native-safe-module/-/react-native-safe-module-1.1.1.tgz#c3eb1d2030661676b075ba8d12c305a31b1d8fb4"
