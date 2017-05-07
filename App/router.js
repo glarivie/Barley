@@ -4,14 +4,16 @@ import Accounts from './containers/Accounts'
 import AddOrEditAccount from './containers/AddOrEditAccount'
 import AddOrEditOperation from './containers/AddOrEditOperation'
 import AccountSingle from './containers/AccountSingle'
-import Stats from './containers/Stats'
+import Statistics from './containers/Statistics'
+import Settings from './containers/Settings'
 
 const router = createRouter(() => ({
   Accounts: () => Accounts,
   AddOrEditAccount: () => AddOrEditAccount,
   AddOrEditOperation: () => AddOrEditOperation,
   AccountSingle: () => AccountSingle,
-  Stats: () => Stats,
+  Statistics: () => Statistics,
+  Settings: () => Settings,
 }))
 
 export default router
