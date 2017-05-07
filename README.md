@@ -1,16 +1,29 @@
-### Barley
+## Barley
 
-##### How to use ?
+#### How to help ?
 
 ```
+git clone git@github.com:hqro/Barley.git
+cd Barley
 yarn
 yarn start
 ```
 
-##### TODOS
+Use [Expo App](https://expo.io) to see your work
 
- - [ ] Different avatar for banks
- - [ ] ScrollView on Account Page
+#### Where to download ?
+
+You can try **Barley** just [here](https://exp.host/@hqro/barley)
+
+#### How it looks ?
+
+![Barley Demo](https://github.com/hqro/Barley/blob/master/demo/barley-demo.png)
+
+#### TODOS
+
+ - [x] Different avatar for banks
+ - [x] ScrollView on Account Page
  - [ ] Remove 2 month older operations
  - [ ] Update accountName on NavBar after edit
- - [ ] Add tabs with stats
+ - [x] Add tab with stats
+ - [ ] Add tab with settings
