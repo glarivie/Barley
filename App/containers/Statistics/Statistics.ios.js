@@ -1,15 +1,15 @@
 import React from 'react'
 import PropTypes from 'prop-types'
-import { View, Text } from 'react-native'
+import { ScrollView, View, Text, Dimensions } from 'react-native'
 import PieChart from 'react-native-pie-chart'
 import { connect } from 'react-redux'
 import _ from 'lodash'
 
 import colors from '../../styles/shared/statsColors.styles'
 
-import styles from './Stats.styles'
+import styles from './Statistics.styles'
 
-const Stats = ({ accounts }) => {
+const Statistics = ({ accounts }) => {
   const stats = _(accounts)
     .map(({ data }) => data)
     .flatMapDeep()
@@ -26,10 +26,10 @@ const Stats = ({ accounts }) => {
   const shares = _.map(stats, amount => amount / total * 100 | 0)
 
   return (
-    <View style={styles.Stats}>
+    <ScrollView style={styles.Statistics} contentContainerStyle={styles.alignItems}>
       {/* <Text style={styles.title}>Debit</Text> */}
       <PieChart
-        chart_wh={250}
+        chart_wh={Dimensions.get('window').width - 30}
         series={series}
         sliceColor={sliceColors}
       />
@@ -38,26 +38,25 @@ const Stats = ({ accounts }) => {
           <View style={styles.row} key={index}>
             <View style={styles[category]} />
             <View style={styles.category}>
-              <Text style={styles.left}>{category} : {amount} €</Text>
-              <Text style={styles.right}>({shares[index]} %)</Text>
+              <Text style={styles.left}>{category} : {amount} € ({shares[index]} %)</Text>
             </View>
           </View>
         ))}
       </View>
-    </View>
+    </ScrollView>
   )
 }
 
-Stats.propTypes = {
+Statistics.propTypes = {
   accounts: PropTypes.array.isRequired,
 }
 
-Stats.route = {
-  navigationBar: { title: 'Account stats' }
+Statistics.route = {
+  navigationBar: { title: 'Account statistics' }
 }
 
 const mapStateToProps = ({ accounts }) => ({
   accounts: _.get(accounts, 'accounts', []),
 })
 
-export default connect(mapStateToProps)(Stats)
+export default connect(mapStateToProps)(Statistics)

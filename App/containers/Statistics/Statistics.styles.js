@@ -5,15 +5,18 @@ import colors from '../../styles/shared/variables.styles'
 import statsColors from '../../styles/shared/statsColors.styles'
 
 const styles = StyleSheet.create({
-  Stats: {
+  Statistics: {
     flex: 1,
     paddingTop: 15,
     backgroundColor: colors.white,
+  },
+  alignItems: {
     alignItems: 'center',
   },
   legend: {
+    flex: 1,
     flexDirection: 'column',
-    marginTop: 20,
+    marginTop: 25,
   },
   row: {
     flexDirection: 'row',
