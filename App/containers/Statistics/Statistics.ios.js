@@ -1,62 +1,82 @@
-import React from 'react'
+import React, { Component } from 'react'
 import PropTypes from 'prop-types'
-import { ScrollView, View, Text, Dimensions } from 'react-native'
-import PieChart from 'react-native-pie-chart'
+import { ScrollView, View, Text } from 'react-native'
+import { ButtonGroup } from 'react-native-elements'
 import { connect } from 'react-redux'
 import _ from 'lodash'
 
-import colors from '../../styles/shared/statsColors.styles'
+import colors from '../../styles/shared/variables.styles'
+
+import Shares from './Shares'
+import Trends from './Trends'
 
 import styles from './Statistics.styles'
 
-const Statistics = ({ accounts }) => {
-  const stats = _(accounts)
-    .map(({ data }) => data)
-    .flatMapDeep()
-    .filter(({ type }) => type === 'debit')
-    .map(({ category, amount }) => ({ category, amount: Math.abs(amount) }))
-    .groupBy('category')
-    .reduce((acc, operation, category) =>
-      _.set(acc, [category], _.sum(operation.map(({ amount }) => amount)))
-    , {})
+class Statistics extends Component {
+  static propTypes = {
+    prepared: PropTypes.object.isRequired,
+    available: PropTypes.number.isRequired,
+  }
 
-  const series = _.map(stats, amount => amount)
-  const sliceColors = Object.keys(stats).map(category => colors[category])
-  const total = _.sum(series)
-  const shares = _.map(stats, amount => amount / total * 100 | 0)
+  static route = {
+    navigationBar: { title: 'Account statistics' },
+  }
 
-  return (
-    <ScrollView style={styles.Statistics} contentContainerStyle={styles.alignItems}>
-      {/* <Text style={styles.title}>Debit</Text> */}
-      <PieChart
-        chart_wh={Dimensions.get('window').width - 30}
-        series={series}
-        sliceColor={sliceColors}
-      />
-      <View style={styles.legend}>
-        {Object.entries(stats).map(([category, amount], index) => (
-          <View style={styles.row} key={index}>
-            <View style={styles[category]} />
-            <View style={styles.category}>
-              <Text style={styles.left}>{category} : {amount} € ({shares[index]} %)</Text>
-            </View>
-          </View>
-        ))}
-      </View>
-    </ScrollView>
-  )
+  state = {
+    tabs: ['Shares', 'Trends'],
+    current: 0,
+  }
+
+  _handleChangeTab = index => this.setState({ current: index })
+
+  _displayTab = () => {
+    const { current, tabs } = this.state
+    const { prepared, available } = this.props
+
+    switch (tabs[current]) {
+      case 'Shares':
+        return <Shares data={prepared} />
+      case 'Trends':
+        return <Trends data={prepared} available={available} />
+      default:
+        return <Shares data={prepared} />
+    }
+  }
+
+  render () {
+    const { current, tabs } = this.state  
+
+    return (
+      <ScrollView style={styles.Statistics}>
+        <ButtonGroup
+          buttons={tabs}
+          onPress={this._handleChangeTab}
+          selectedIndex={current}
+          containerStyle={styles.ButtonsGroup}
+          buttonStyle={styles.TypeButtons}
+          selectedBackgroundColor={colors.pistache}
+          selectedTextStyle={styles.selectedText}
+          innerBorderStyle={styles.innerBorder}
+        />
+        {this._displayTab()}
+      </ScrollView>
+    )
+  }
 }
 
-Statistics.propTypes = {
-  accounts: PropTypes.array.isRequired,
-}
+const mapStateToProps = state => {
+  const accounts = _.get(state.accounts, 'accounts', [])
 
-Statistics.route = {
-  navigationBar: { title: 'Account statistics' }
+  return ({
+    prepared: _(accounts)
+      .map(({ data }) => data)
+      .flatMapDeep()
+      .filter(({ type }) => type === 'debit')
+      .map(({ date, category, amount }) => ({ date, category, amount: Math.abs(amount) })),
+    available: _(accounts)
+      .map(({ amount }) => amount)
+      .sum()
+  })
 }
-
-const mapStateToProps = ({ accounts }) => ({
-  accounts: _.get(accounts, 'accounts', []),
-})
 
 export default connect(mapStateToProps)(Statistics)
