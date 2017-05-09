@@ -9,6 +9,18 @@ const styles = StyleSheet.create({
     backgroundColor: colors.white,
     alignItems: 'center',
   },
+  big: {
+    fontSize: 36,
+    fontWeight: 'bold',
+    color: colors.lightblue,
+  },
+  margin : {
+    marginBottom: 45,
+    color: colors.pistache,
+  },
+  color: {
+    color: colors.pistache,
+  },
 })
 
 export default styles

@@ -31,10 +31,13 @@ const Trends = ({ data, available }) => {
 
   return (
     <View style={styles.Trends}>
-      <Text>available: {available.toFixed(2)} €</Text>
-      <Text>spent: {meanByDay} € / day</Text>
-      <Text>daysLeftInMonth: {daysLeftInMonth} day(s)</Text>
-      <Text>dayLeftBeforeBankruptcy: {dayLeftBeforeBankruptcy} day(s)</Text>
+      <Text style={styles.big}>{available.toFixed(2)} €</Text>
+      <Text style={styles.margin}>Total available</Text>
+      <Text style={styles.big}>{meanByDay.toFixed(2)} €</Text>
+      <Text style={styles.margin}>Spent by day</Text>
+      <Text style={styles.big}>{dayLeftBeforeBankruptcy}</Text>
+      <Text style={styles.color}>Day(s) left before bankruptcy</Text>
+      <Text style={styles.color}>{daysLeftInMonth} day(s) left in month</Text>
     </View>
   )
 }
