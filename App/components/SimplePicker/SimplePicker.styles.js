@@ -9,6 +9,7 @@ const styles = StyleSheet.create({
     flex: 1,
     justifyContent: 'flex-end',
     alignItems: 'center',
+    backgroundColor: 'rgba(0, 0, 0, .25)',
   },
   Touchable: {
     width: width,
@@ -23,7 +24,9 @@ const styles = StyleSheet.create({
   },
   buttonView: {
     width: width,
-    padding: 8,
+    paddingTop: 10,
+    paddingLeft: 10,
+    paddingRight: 10,
     borderTopWidth: 0.5,
     borderTopColor: colors.lightblue,
     justifyContent: 'space-between',

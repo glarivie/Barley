@@ -8,6 +8,7 @@ import {
   PickerIOS,
   TouchableWithoutFeedback,
 } from 'react-native'
+import { Icon } from 'react-native-elements'
 
 import colors from '../../styles/shared/variables.styles'
 
@@ -18,8 +19,6 @@ class SimplePicker extends Component {
     buttonColor: PropTypes.string,
     options: PropTypes.array.isRequired,
     labels: PropTypes.array,
-    confirmText : PropTypes.string,
-    cancelText : PropTypes.string,
     itemStyle: PropTypes.object,
     onSubmit: PropTypes.func,
   }
@@ -27,8 +26,6 @@ class SimplePicker extends Component {
   static defaultProps = {
     buttonColor: colors.pistache,
     itemStyle: {},
-    cancelText: 'Cancel',
-    confirmText: 'Confirm',
   }
 
   state = {
@@ -75,7 +72,7 @@ class SimplePicker extends Component {
 
   render() {
     const { buttonColor, modalVisible, selectedOption } = this.state
-    const { itemStyle, cancelText, confirmText, options } = this.props
+    const { itemStyle, options } = this.props
 
     return (
       <Modal
@@ -90,15 +87,21 @@ class SimplePicker extends Component {
           <View style={styles.modalContainer}>
             <View style={styles.buttonView}>
               <TouchableOpacity onPress={this.togglePicker}>
-                <Text style={{ color: buttonColor }}>
-                  {cancelText}
-                </Text>
+                <Icon
+                  name='ios-close-circle'
+                  type='ionicon'
+                  color={colors.error}
+                  size={36}
+                />
               </TouchableOpacity>
 
               <TouchableOpacity onPress={this.onPressSubmit}>
-                <Text style={{ color: buttonColor }}>
-                  {confirmText}
-                </Text>
+                <Icon
+                  name='ios-checkmark-circle'
+                  type='ionicon'
+                  color={buttonColor}
+                  size={36}
+                />
               </TouchableOpacity>
             </View>
 
