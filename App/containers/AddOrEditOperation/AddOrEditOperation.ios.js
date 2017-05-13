@@ -125,7 +125,6 @@ class AddOrEditOperation extends Component {
           ref={p => this._picker = p}
           options={categories}
           onSubmit={value => this.handleChangeInput('category', value)}
-          confirmText="Select"
         />
       </ScrollView>
     )
