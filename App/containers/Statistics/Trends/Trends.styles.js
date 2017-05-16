@@ -15,7 +15,7 @@ const styles = StyleSheet.create({
     color: colors.lightblue,
   },
   margin : {
-    marginBottom: 45,
+    marginBottom: 25,
     color: colors.pistache,
   },
   color: {

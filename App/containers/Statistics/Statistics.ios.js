@@ -32,10 +32,13 @@ class Statistics extends Component {
   _displayTab = () => {
     const { current, tabs } = this.state
     const { prepared, available } = this.props
+    const shareData = prepared
+      .filter(({ type }) => type === 'debit')
+      .map(({ date, category, amount }) => ({ date, category, amount: Math.abs(amount) }))
 
     switch (tabs[current]) {
       case 'Shares':
-        return <Shares data={prepared} />
+        return <Shares data={shareData} />
       case 'Trends':
         return <Trends data={prepared} available={available} />
       default:
@@ -44,7 +47,7 @@ class Statistics extends Component {
   }
 
   render () {
-    const { current, tabs } = this.state  
+    const { current, tabs } = this.state
 
     return (
       <ScrollView style={styles.Statistics}>
@@ -70,9 +73,7 @@ const mapStateToProps = state => {
   return ({
     prepared: _(accounts)
       .map(({ data }) => data)
-      .flatMapDeep()
-      .filter(({ type }) => type === 'debit')
-      .map(({ date, category, amount }) => ({ date, category, amount: Math.abs(amount) })),
+      .flatMapDeep(),
     available: _(accounts)
       .map(({ amount }) => amount)
       .sum()
