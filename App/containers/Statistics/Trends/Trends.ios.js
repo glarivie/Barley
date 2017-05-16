@@ -32,7 +32,7 @@ const Trends = ({ data, available }) => {
       <Text style={styles.big}>{available.toFixed(2)} €</Text>
       <Text style={styles.margin}>Total available</Text>
       <Text style={styles.big}>{meanByDay.toFixed(2)} €</Text>
-      <Text style={styles.margin}>Spent by day</Text>
+      <Text style={styles.margin}>Spent by day (mean)</Text>
       <Text style={styles.big}>{debitByDay[0].toFixed(2)} €</Text>
       <Text style={styles.margin}>Spent today</Text>
       <Text style={styles.big}>{dayLeftBeforeBankruptcy}</Text>
