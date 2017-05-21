@@ -1,6 +1,6 @@
 import React, { Component } from 'react'
 import PropTypes from 'prop-types'
-import { ScrollView, View, Text } from 'react-native'
+import { ScrollView } from 'react-native'
 import { ButtonGroup } from 'react-native-elements'
 import { connect } from 'react-redux'
 import _ from 'lodash'
