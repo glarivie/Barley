@@ -1,11 +1,12 @@
 import React, { Component } from 'react'
 import PropTypes from 'prop-types'
-import { View, Text, ScrollView } from 'react-native'
+import { View, Text, ScrollView, ActionSheetIOS } from 'react-native'
 import { List, ListItem, Button } from 'react-native-elements'
 import { connect } from 'react-redux'
 import { get, isEmpty } from 'lodash'
 
 import router from '../../router'
+import actions from '../../actions'
 
 import SettingsNavBar from '../../components/SettingsNavBar'
 
@@ -31,6 +32,23 @@ class AccountSingle extends Component {
       ),
     },
   }
+
+  deleteOperation = operationID => {
+    const { dispatch, navigator, account } = this.props
+
+    dispatch(actions.accounts.deleteOperation(operationID, account._id))
+    // navigator.popToTop()
+  }
+
+  showActionSheet = (_id, label) =>
+    ActionSheetIOS.showActionSheetWithOptions({
+      options: ['Delete', 'Cancel'],
+      title: 'Confirm delete operation ?',
+      message: label,
+      cancelButtonIndex: 1,
+      destructiveButtonIndex: 0,
+    },
+    buttonIndex => buttonIndex === 0 ? this.deleteOperation(_id) : false)
 
   render () {
     const { navigator, account: { _id, amount, data } } = this.props
@@ -60,7 +78,11 @@ class AccountSingle extends Component {
                   title={label}
                   subtitle={date || category}
                   rightTitle={type === 'credit' ? `+${amount.toFixed(2)} €` : `${amount.toFixed(2)} €`}
-                  hideChevron
+                  rightIcon={{
+                    name: 'ios-trash-outline',
+                    type: 'ionicon',
+                  }}
+                  onLongPress={() => this.showActionSheet(_id, label)}
                 />
               ))}
             </List>

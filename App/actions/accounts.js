@@ -22,9 +22,17 @@ const addNewOperation = (_id, operation) => async dispatch =>
     data: { _id, operation },
   })
 
+
+const deleteOperation = (operationID, accountID) => async dispatch =>
+  dispatch({
+    type: 'DELETE_OPERATION',
+    data: { operationID, accountID },
+  })
+
 export default {
   setAccount,
   editAccount,
   deleteAccount,
   addNewOperation,
+  deleteOperation,
 }

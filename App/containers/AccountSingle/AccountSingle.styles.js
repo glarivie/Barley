@@ -28,6 +28,9 @@ const styles = StyleSheet.create({
     borderTopWidth: 0.5,
     borderBottomWidth: 0,
   },
+  Icon: {
+    color: colors.pistache,
+  },
 })
 
 export default styles
