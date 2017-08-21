@@ -5,7 +5,7 @@ import { colors } from '../../styles/shared/variables.styles'
 const styles = StyleSheet.create({
   container: {
     flex: 1,
-    backgroundColor: colors.white,
+    backgroundColor: colors.$white,
     alignItems: 'center',
     justifyContent: 'center',
   },

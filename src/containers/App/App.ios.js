@@ -10,7 +10,7 @@ class App extends Component {
     return (
       <View style={styles.container}>
         <StatusBar barStyle="light-content" />
-        <Text>Open up App.js to start working on your app!</Text>
+        <Text>Bonsoir</Text>
       </View>
     )
   }
