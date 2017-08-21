@@ -1,0 +1,24 @@
+{
+  "expo": {
+    "name": "Barley",
+    "description": "Simple banking account manager",
+    "slug": "barley",
+    "privacy": "unlisted",
+    "sdkVersion": "20.0.0",
+    "version": "2.0.0",
+    "orientation": "portrait",
+    "primaryColor": "#FFFFFF",
+    "icon": "./src/assets/icons/app-icon.png",
+    "loading": {
+      "icon": "./src/assets/icons/loading-icon.png",
+      "hideExponentText": false
+    },
+    "packagerOpts": {
+      "assetExts": ["ttf", "mp4"]
+    },
+    "ios": {
+      "supportsTablet": true
+    },
+    "entryPoint": "./src/index.js"
+  }
+}
